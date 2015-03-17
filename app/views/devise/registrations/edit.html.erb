@@ -1,3 +1,4 @@
+<% provide(:title, "Edit profile") %>
 <h1>Edit <%= resource_name.to_s.humanize %></h1>
 
 <div class="row">
@@ -34,10 +35,18 @@
       </div>
     <% end %>
 
-    <h3>Cancel my account</h3>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <h5 style="text-align:center">Cancel my account</h5>
 
-    <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete , class: "btn btn-danger"%></p>
+        <p><%= button_to "Delete my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete , class: "btn btn-danger" %></p>
 
-    <%= link_to "Back", :back %>
+      </div>
+    </div>
+    <div class="pull-right">
+    <%= link_to "Back", :back, class: "btn btn-primary" %>
+    </div>
   </div>
 </div>
+
+

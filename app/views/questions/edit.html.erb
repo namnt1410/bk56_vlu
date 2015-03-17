@@ -1,6 +1,7 @@
+<% provide(:title, "Edit Question") %>
 <h1>Editing question</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @question %> |
-<%= link_to 'Back', questions_path %>
+<%= link_to 'Show', @question, class: "btn btn-primary" %>
+<%= link_to 'Back', questions_path, class: "btn btn-default" %>

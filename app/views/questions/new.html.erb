@@ -1,5 +1,6 @@
-<h1>New question</h1>
+<% provide(:title, "New Question") %>
+<h1 class="col-md-8 col-offset-0">New question</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Back', questions_path %>
+<%= link_to 'Back', questions_path, class: "btn btn-primary" %>
