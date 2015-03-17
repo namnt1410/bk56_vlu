@@ -1,20 +1,18 @@
 <% provide(:title, @question.title ) %>
 <p id="notice"><%= notice %></p>
-
 <p>
-  <strong>Title:</strong>
-  <%= @question.title %>
+    <h3><%= @question.title %></h3>
 </p>
+<div class="panel panel-info">
 
-<p>
-  <strong>Content:</strong>
+
+<div class="panel-body">
   <%= @question.content %>
-</p>
+</div>
+<div class="panel-footer">
+  Posted by: <%= @question.user.email %>
+</div>
+</div>
 
-<p>
-  <strong>User:</strong>
-  <%= @question.user.email %>
-</p>
-
-<%= link_to 'Edit', edit_question_path(@question) %> |
-<%= link_to 'Back', questions_path %>
+<%= link_to 'Edit', edit_question_path(@question), class: "btn btn-primary" %>
+<%= link_to 'Back', questions_path, class: "btn btn-default" %>

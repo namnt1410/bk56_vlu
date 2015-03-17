@@ -1,7 +1,8 @@
 class QuestionsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:show]
   before_action :set_question, only: [:show, :edit, :update, :destroy]
-
+  before_action :correct_user,   only: [:destroy, :edit]
+  
   respond_to :html
 
   def index
@@ -33,7 +34,7 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    @question.destroy
+    @question.delete
     respond_with(@question)
   end
 
@@ -44,5 +45,9 @@ class QuestionsController < ApplicationController
 
     def question_params
       params.require(:question).permit(:title, :content )
+    end
+    def correct_user
+      @question = current_user.questions.find_by(id: params[:id])
+      redirect_to questions_url, alert: "You can't delete or edit other's posts!" if @question.nil?
     end
 end

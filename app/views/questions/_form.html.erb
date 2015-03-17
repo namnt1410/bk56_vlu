@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-6 col-md-offset-3"><%= form_for(@question) do |f| %>
+  <div class="col-md-8 col-md-offset-0"><%= form_for(@question) do |f| %>
       <% if @question.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
@@ -20,7 +20,7 @@
         <%= f.label :content %><br>
         <%= f.text_area :content , class: 'form-control' %>
       </div>
-      <div class="actions">
+      <div class="actions col-md-6 col-md-offset-3">
         <%= f.submit "Create Question", class: "btn btn-primary" %>
       </div>
     <% end %>

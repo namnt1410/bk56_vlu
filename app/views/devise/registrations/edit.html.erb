@@ -36,14 +36,16 @@
     <% end %>
 
     <div class="row">
-      <div class="col-md-4 col-md-offset-4">
-        <h4>Cancel my account</h4>
+      <div class="col-md-6 col-md-offset-3">
+        <h5 style="text-align:center">Cancel my account</h5>
 
-        <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete , class: "btn btn-danger" %></p>
+        <p><%= button_to "Delete my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete , class: "btn btn-danger" %></p>
 
       </div>
     </div>
-    <%= link_to "Back", :back %>
+    <div class="pull-right">
+    <%= link_to "Back", :back, class: "btn btn-primary" %>
+    </div>
   </div>
 </div>
 
