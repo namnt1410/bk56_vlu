@@ -1,38 +1,20 @@
-<% provide(:title, "All Questions") %>
-<h1>Question list</h1></h1>
+<% provide(:title, "Question List") %>
 
-<% if user_signed_in? %>
-  <%= link_to 'New question', new_question_path, class: "btn btn-primary" %>
-<% end %>
-
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Content</th>
-      <th>User</th>
-      <% if user_signed_in? %>
-      <th colspan="2">Options</th>
-      <% end %>
-    </tr>
-  </thead>
-  
-  <tbody>
+<div>
+  <h3>All Questions</h3>
+  <% if user_signed_in? %>
+    <%= link_to 'Ask Question', new_question_path, class: "btn btn-primary"%>
+  <% end %>
+  <ol class="questions">
     <% @questions.each do |question| %>
-      <tr>
-        <td><%= link_to question.title, question %></td>
-        <td><%= question.content %></td>
-        <td><%= question.user.email %></td>
-        <% if user_signed_in? and current_user == question.user %>
-         <td><%= link_to 'Edit', edit_question_path(question) %></td> 
-         <td><%= link_to 'Delete', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-         <% else %>
-         <td></td>
-         <td></td>
-        <% end %>
-      </tr>
+    <li id="question-<%= question.id %>">
+      <span class="title"><%= link_to question.title, question %></span>
+      <span class="content"><%= question.content %></span>
+      <span class="timestamp">
+        Asked <%= time_ago_in_words(question.created_at) %> ago <%= question.user.email %>
+      </span>
+    </li>
     <% end %>
-  </tbody>
-</table>
-<%= will_paginate %>
-<br>
+  </ol>
+  <%= will_paginate %>
+</div>

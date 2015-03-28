@@ -4,14 +4,12 @@
     <h3><%= @question.title %></h3>
 </p>
 <div class="panel panel-info">
-
-
-<div class="panel-body">
-  <%= @question.content %>
-</div>
-<div class="panel-footer">
-  Posted by: <%= @question.user.email %>
-</div>
+  <div class="panel-body">
+    <%= @question.content %>
+  </div>
+  <div class="panel-footer">
+    Posted by: <%= @question.user.email %>
+  </div>
 </div>
 
 <% if user_signed_in? and current_user == @question.user  %>
