@@ -4,4 +4,10 @@ class Question < ActiveRecord::Base
   validates :user_id, presence: true
   validates :title, presence: true, length: { maximum: 140 }
   validates :content, presence: true, length: { maximum: 500 }
+  
+end
+def count_up
+  # self.views ||= 0
+  self.views += 1
+  self.save
 end

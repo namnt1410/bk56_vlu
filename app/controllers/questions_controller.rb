@@ -12,6 +12,9 @@ class QuestionsController < ApplicationController
   end
 
   def show
+    @question = Question.find(params[:id])
+    @question.views += 1
+    @question.save
     respond_with(@question)
   end
 
