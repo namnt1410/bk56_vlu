@@ -6,8 +6,3 @@ class Question < ActiveRecord::Base
   validates :content, presence: true, length: { maximum: 500 }
   
 end
-def count_up
-  # self.views ||= 0
-  self.views += 1
-  self.save
-end

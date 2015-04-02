@@ -896,8 +896,11 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   }
   .content {
     display: block;
+    margin-top: 15px;
     margin-left: 0px;
     font-size: 100%;
+    border-radius: 20px 100px 100px 100px;
+    border: 2px red;
     img {
       display: block;
       padding: 5px 0;
