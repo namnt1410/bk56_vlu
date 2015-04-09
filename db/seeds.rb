@@ -9,6 +9,8 @@ end
 users = User.order(:created_at).take(6)
 50.times do |n|
   title = "Example Question #{n+1}"
+  views = rand(1..8)*9 || rand(8..25)*2 || rand(5..7)*3
   content = Faker::Lorem.sentence(5)
-  users.each { |user| user.questions.create title: title, content: content }
+  created_at = (rand(2..15)).days.ago
+  users.each { |user| user.questions.create title: title, content: content, created_at: created_at, views: views }
 end

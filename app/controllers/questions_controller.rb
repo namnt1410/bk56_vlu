@@ -7,10 +7,10 @@ class QuestionsController < ApplicationController
 
   def index
     @questions = Question.all
-    @questions = Question.paginate(page: params[:page], per_page: 5)
+    @questions = Question.paginate(page: params[:page], per_page: 10)
     respond_with(@questions)
   end
-
+  
   def show
     @question = Question.find(params[:id])
     @question.views += 1
