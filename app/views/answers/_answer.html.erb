@@ -1,0 +1,10 @@
+<%= div_for answer do %>
+        <p>
+                <strong>
+                        Posted <%= time_ago_in_words(answer.created_at) %> ago
+                       
+                </strong>
+                <br/>
+                <%= answer.content %>
+        </p>
+<% end %>

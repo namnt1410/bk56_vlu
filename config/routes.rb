@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :questions
+
+  resources :questions do
+    resources :answers , :only => [:create]
+  end
+  resources :answers
   root to: 'questions#index'
   # root to: 'static_pages#home'
   get 'home'    => 'static_pages#home'
