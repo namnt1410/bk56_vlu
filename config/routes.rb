@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :answers
+
   resources :questions
   root to: 'questions#index'
   # root to: 'static_pages#home'
