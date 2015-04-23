@@ -1,10 +1,11 @@
 class CreateAnswers < ActiveRecord::Migration
   def change
+    drop_table :answers
     create_table :answers do |t|
-      t.belongs_to :question, index: true
-      t.text :content
+      t.integer :question_id
+      t.integer :user_id
+      t.text :description
       t.integer :vote, :default => 0
-      t.belongs_to :user, index: true
 
       t.timestamps
     end

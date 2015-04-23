@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
 
+  get 'answers/create'
+
+  get 'answers/destroy'
+
   resources :questions do
-    resources :answers , :only => [:create]
+    resources :answers
   end
-  resources :answers
+  
   root to: 'questions#index'
   # root to: 'static_pages#home'
   get 'home'    => 'static_pages#home'
