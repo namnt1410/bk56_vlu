@@ -1,7 +1,9 @@
 class AnswersController < ApplicationController
-<<<<<<< HEAD
+
   before_action :authenticate_user!, only: [:destroy, :edit]
-   
+  before_action :set_answer, only: [:show, :edit, :update, :destroy]
+  
+  respond_to :html
   def new
     @answer = Answer.new
   end
@@ -32,10 +34,6 @@ class AnswersController < ApplicationController
   #     @answer = current_user.answers.find_by(id: params[:id])
   #     redirect_to questions_url, alert: "You can't delete or edit other's posts!" if @question.nil?
   #   end
-=======
-  before_action :set_answer, only: [:show, :edit, :update, :destroy]
-
-  respond_to :html
 
   def index
     @answers = Answer.all
@@ -46,27 +44,8 @@ class AnswersController < ApplicationController
     respond_with(@answer)
   end
 
-  def new
-    @answer = Answer.new
-    respond_with(@answer)
-  end
-
-  def edit
-  end
-
-  def create
-    @answer = Answer.new(answer_params)
-    @answer.save
-    respond_with(@answer)
-  end
-
   def update
     @answer.update(answer_params)
-    respond_with(@answer)
-  end
-
-  def destroy
-    @answer.destroy
     respond_with(@answer)
   end
 
@@ -78,5 +57,5 @@ class AnswersController < ApplicationController
     def answer_params
       params.require(:answer).permit(:question_id, :title, :description)
     end
->>>>>>> upstream/develop
+
 end
