@@ -1,11 +1,12 @@
 class AnswersController < ApplicationController
-
-  before_action :authenticate_user!, only: [:destroy, :edit]
   before_action :set_answer, only: [:show, :edit, :update, :destroy]
   
   respond_to :html
+  
   def new
+    @question = Question.find(params[:question_id])
     @answer = Answer.new
+    respond_with(@answer)
   end
   
   def create
@@ -14,8 +15,8 @@ class AnswersController < ApplicationController
     # @answer = current_user.comments.build(params[:answer_params])
     @answer = Answer.new(answer_params)
     @answer.question_id = @question.id
-    @answer.user_id = current_user.id
-    @answer.vote = 0
+    # @answer.user_id = current_user.id
+    # @answer.vote = 0
     @answer.save
     
     redirect_to @question
