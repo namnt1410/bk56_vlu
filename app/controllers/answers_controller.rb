@@ -1,6 +1,6 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!, only: [:destroy, :edit]
-  
+   
   def new
     @answer = Answer.new
   end
@@ -18,9 +18,17 @@ class AnswersController < ApplicationController
   end
 
   def destroy
+    @answer.delete
+    respond_with(@answer)
   end
   
   def answer_params
     params.require(:answer).permit(:description,:vote, :user_id)
   end
+  
+  # private
+  #   def correct_user
+  #     @answer = current_user.answers.find_by(id: params[:id])
+  #     redirect_to questions_url, alert: "You can't delete or edit other's posts!" if @question.nil?
+  #   end
 end

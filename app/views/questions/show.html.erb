@@ -31,7 +31,7 @@
 
 <% if user_signed_in? %>
   <%= form_for [@question, @question.answers.build] do |f| %>
-    <p><%= f.text_area :description, class: 'form-control'  %></p>
+    <p><%= f.text_area :description, class: "form-control" %></p>
     <p><%= f.submit "Post answer", class: "btn btn-primary" %> </p>
 <% end %>
   <% else %>
