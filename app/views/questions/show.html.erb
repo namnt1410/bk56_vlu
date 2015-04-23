@@ -17,17 +17,17 @@
   <%= link_to 'Edit', edit_question_path(@question), class: "btn btn-primary" %>
   <%= link_to 'Delete', @question, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
-
-<h2>Answer List for this question</h2>
-<div><strong><%= @question.answers.count %>  answers</strong></div>
+<hr>
+<h4><%= @question.answers.count %>  Answers</h4>
+<hr>
 <% @question.answers.each do |answer| %>
 <div>
   <p><%= answer.description %></p>
-  &raquo Answered by <%= answer.user.email %> at <%= time_ago_in_words answer.created_at %> ago |
-  Vote:<%= answer.vote %>
+  <hr>
 </div>
 <% end %>
 
+<h4>Your Answer</h4>
 <% if user_signed_in? %>
   <%= form_for [@question, @question.answers.build] do |f| %>
     <p><%= f.text_area :description, class: "form-control" %></p>
