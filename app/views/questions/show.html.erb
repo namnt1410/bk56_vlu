@@ -21,10 +21,15 @@
 <h4><%= @question.answers.count %>  Answers</h4>
 <hr>
 <% @question.answers.each do |answer| %>
-<div>
-  <p><%= answer.description %></p>
-  <hr>
+<div class="panel panel-info">
+  <div class="panel-body">
+    <%= answer.description %>
+  </div>
+  <div class="panel-footer">
+    Answered by <%= User.find_by(id: answer.user_id).email %> at <%= answer.created_at %>
+  </div>
 </div>
+<hr>
 <% end %>
 
 <h4>Your Answer</h4>

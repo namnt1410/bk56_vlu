@@ -18,6 +18,7 @@
         <td><%= answer.description %></td>
         <td><%= link_to 'Show', question_answer_path(answer.question, answer) %></td>
         <td><%= link_to 'Edit', edit_question_answer_path(answer.question, answer) %></td>
+        <td><%= link_to 'Delete', question_answer_path(answer.question, answer), class: "", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
