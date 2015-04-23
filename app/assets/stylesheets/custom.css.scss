@@ -913,3 +913,19 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
     font-size: 80%;
   }
 }
+
+/* answer */
+.answer {
+  li {
+      border-top: 1px solid #e8e8e8;
+  }
+  .content {
+    resize:horizon; 
+   max-height:50px; 
+   min-height:40px;
+  }
+  .button_answer {
+    width: 5px;
+    height: 5px;
+  }
+}

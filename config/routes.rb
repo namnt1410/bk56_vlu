@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
-  resources :questions
+
+  get 'answers/create'
+
+  get 'answers/destroy'
+
+  resources :questions do
+    resources :answers
+  end
+  
   root to: 'questions#index'
   # root to: 'static_pages#home'
   get 'home'    => 'static_pages#home'

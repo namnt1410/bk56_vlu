@@ -5,4 +5,6 @@ class Question < ActiveRecord::Base
   validates :title, presence: true, length: { maximum: 140 }
   validates :content, presence: true, length: { maximum: 500 }
 
+  has_many :answers, :dependent => :destroy
+  
 end
