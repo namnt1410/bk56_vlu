@@ -15,6 +15,7 @@ class AnswersController < ApplicationController
     @answer = Answer.new(answer_params)
     @answer.question_id = @question.id
     @answer.user_id = current_user.id
+    @answer.vote = 0
     @answer.save
     
     redirect_to @question
@@ -49,6 +50,10 @@ class AnswersController < ApplicationController
     respond_with(@answer)
   end
 
+  def get_name_user
+    @user = User.find_by(id: params[:@answer.user_id])
+    return @user.email
+  end
   private
     def set_answer
       @answer = Answer.find(params[:id])

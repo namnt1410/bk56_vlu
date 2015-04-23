@@ -24,7 +24,7 @@
 <div>
   <p><%= answer.description %></p>
   <%= time_ago_in_words answer.created_at %> ago |
-  Posted by <%= answer.user_id %> |
+  Posted by <%= answer.user.email %> |
   Vote:<%= answer.vote %>
 </div>
 <% end %>
