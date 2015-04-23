@@ -8,7 +8,7 @@
     <%= @question.content %>
   </div>
   <div class="panel-footer">
-    Posted by: <%= @question.user.email %>
+    Asked by: <%= @question.user.email %> at <%= @question.created_at %>
   </div>
 </div>
 
@@ -23,8 +23,7 @@
 <% @question.answers.each do |answer| %>
 <div>
   <p><%= answer.description %></p>
-  <%= time_ago_in_words answer.created_at %> ago |
-  Posted by <%= answer.user.email %> |
+  &raquo Answered by <%= answer.user.email %> at <%= time_ago_in_words answer.created_at %> ago |
   Vote:<%= answer.vote %>
 </div>
 <% end %>
@@ -35,5 +34,5 @@
     <p><%= f.submit "Post answer", class: "btn btn-primary" %> </p>
 <% end %>
   <% else %>
-    <div>Sign in to answer:</div> <%= link_to "Log in", new_user_session_path, class: "btn btn-primary" %>
+    <span>Log in to answer</span> <%= link_to "Log in", new_user_session_path, class: "btn btn-primary" %>
 <% end %>
