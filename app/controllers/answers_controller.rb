@@ -14,7 +14,7 @@ class AnswersController < ApplicationController
     @answer.user_id = current_user.id
     @answer.save
     
-    redirect_to root_path
+    redirect_to @question
   end
 
   def destroy
