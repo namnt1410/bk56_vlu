@@ -6,5 +6,9 @@ class Question < ActiveRecord::Base
   validates :content, presence: true, length: { maximum: 500 }
 
   has_many :answers, :dependent => :destroy
+
   
+  def capitalized_title
+    title.capitalize
+  end
 end

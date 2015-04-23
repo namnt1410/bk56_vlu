@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'answers/create'
-
-  get 'answers/destroy'
-
   resources :questions do
     resources :answers
   end
