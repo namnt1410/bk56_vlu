@@ -1,22 +1,21 @@
 <% provide(:title, @question.title ) %>
 <p id="notice"><%= notice %></p>
-<p>
-    <h3><%= @question.title %></h3>
-</p>
+<h3><%= @question.title %></h3>
 <div class="panel panel-info">
   <div class="panel-body">
     <%= @question.content %>
   </div>
   <div class="panel-footer">
-    Asked by: <%= @question.user.email %> at <%= @question.created_at %>
+    Asked by: <%= link_to @question.user.email, @question.user %> at <%= @question.created_at %>
+    <% if user_signed_in? and current_user == @question.user  %>
+    <hr>
+      <%= link_to 'Edit', edit_question_path(@question)%>
+      <%= link_to 'Delete', @question,  method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
   </div>
 </div>
 
 <%= link_to 'Back', questions_path, class: "btn btn-default" %>
-<% if user_signed_in? and current_user == @question.user  %>
-  <%= link_to 'Edit', edit_question_path(@question), class: "btn btn-primary" %>
-  <%= link_to 'Delete', @question, class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
-<% end %>
 <hr>
 <h4><%= @question.answers.count %>  Answers</h4>
 <hr>
@@ -26,18 +25,23 @@
     <%= answer.description %>
   </div>
   <div class="panel-footer">
-    Answered by <%= User.find_by(id: answer.user_id).email %> at <%= answer.created_at %>
+    Answered by <%= link_to User.find_by(id: answer.user_id).email, User.find_by(id: answer.user_id) %> at <%= answer.created_at %>
+    <% if user_signed_in? and current_user.id == answer.user_id  %>
+    <hr>
+    <%= link_to 'Edit', edit_question_answer_path(answer.question, answer) %>
+    <%= link_to 'Delete', question_answer_path(answer.question, answer), class: "", method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
   </div>
 </div>
 <hr>
 <% end %>
 
-<h4>Your Answer</h4>
 <% if user_signed_in? %>
+  <h4>Your Answer</h4>
   <%= form_for [@question, @question.answers.build] do |f| %>
     <p><%= f.text_area :description, class: "form-control" %></p>
     <p><%= f.submit "Post answer", class: "btn btn-primary" %> </p>
-<% end %>
-  <% else %>
-    <span>Log in to answer</span> <%= link_to "Log in", new_user_session_path, class: "btn btn-primary" %>
+  <% end %>
+<% else %>
+  <span>Log in to answer</span> <%= link_to "Log in", new_user_session_path, class: "btn btn-primary" %>
 <% end %>
