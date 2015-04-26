@@ -6,7 +6,8 @@
     <%= @question.content %>
   </div>
   <div class="panel-footer">
-    Asked by: <%= link_to @question.user.email, @question.user %> at <%= @question.created_at %>
+    Asked by
+        <%= image_tag @question.user.gravatar_url , width: 15 %><%= link_to @question.user.email, @question.user %> at <%= @question.created_at %>
     <% if user_signed_in? and current_user == @question.user  %>
     <hr>
       <%= link_to 'Edit', edit_question_path(@question)%>
@@ -25,22 +26,24 @@
     <%= answer.description %>
   </div>
   <div class="panel-footer">
-    Answered by <%= link_to User.find_by(id: answer.user_id).email, User.find_by(id: answer.user_id) %> at <%= answer.created_at %>
+    Answered by 
+        <%= image_tag User.find_by(id: answer.user_id).gravatar_url , width: 15 %><%= link_to User.find_by(id: answer.user_id).email, User.find_by(id: answer.user_id) %> at <%= answer.created_at %>
     <% if user_signed_in? and current_user.id == answer.user_id  %>
     <hr>
-    <%= link_to 'Edit', edit_question_answer_path(answer.question, answer) %>
-    <%= link_to 'Delete', question_answer_path(answer.question, answer), class: "", method: :delete, data: { confirm: 'Are you sure?' } %>
+      <%= link_to 'Edit', edit_question_answer_path(answer.question, answer) %>
+      <%= link_to 'Delete', question_answer_path(answer.question, answer), class: "", method: :delete, data: { confirm: 'Are you sure?' } %>
     <% end %>
   </div>
 </div>
 <hr>
+  <%= will_paginate @question.answers.paginate(page: params[:page]) %>
 <% end %>
 
 <% if user_signed_in? %>
   <h4>Your Answer</h4>
   <%= form_for [@question, @question.answers.build] do |f| %>
     <p><%= f.text_area :description, class: "form-control" %></p>
-    <p><%= f.submit "Post answer", class: "btn btn-primary" %> </p>
+    <p><%= f.submit "Post your answer", class: "btn btn-primary" %> </p>
   <% end %>
 <% else %>
   <span>Log in to answer</span> <%= link_to "Log in", new_user_session_path, class: "btn btn-primary" %>
