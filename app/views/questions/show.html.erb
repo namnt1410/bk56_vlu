@@ -24,20 +24,21 @@
 <div class="panel panel-info">
   <div class="panel-body">
     <%= answer.description %>
+    <%= answer.id%>
   </div>
   <div class="panel-footer">
     Answered by 
         <%= image_tag User.find_by(id: answer.user_id).gravatar_url , width: 15 %><%= link_to User.find_by(id: answer.user_id).email, User.find_by(id: answer.user_id) %> at <%= answer.created_at %>
     <% if user_signed_in? and current_user.id == answer.user_id  %>
-    <hr>
-      <%= link_to 'Edit', edit_question_answer_path(answer.question, answer) %>
-      <%= link_to 'Delete', question_answer_path(answer.question, answer), class: "", method: :delete, data: { confirm: 'Are you sure?' } %>
+      <%= link_to '', edit_question_answer_path(answer.question, answer), title: 'Edit', rel: 'tootlip', class: "glyphicon glyphicon-pencil" %>
+      <br>
+      <%= link_to '', question_answer_path(answer.question, answer), title: 'Delete', rel: 'tooltip', class: "glyphicon glyphicon-remove", method: :delete, data: { confirm: 'Are you sure?' } %>
     <% end %>
   </div>
 </div>
+<% end %>
 <hr>
   <%= will_paginate @question.answers.paginate(page: params[:page]) %>
-<% end %>
 
 <% if user_signed_in? %>
   <h4>Your Answer</h4>

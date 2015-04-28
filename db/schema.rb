@@ -17,6 +17,8 @@ ActiveRecord::Schema.define(version: 20150414135047) do
     t.integer  "question_id"
     t.string   "title"
     t.text     "description"
+    t.integer  "user_id"
+    t.integer  "vote",        default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

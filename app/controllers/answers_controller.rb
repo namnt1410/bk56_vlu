@@ -12,31 +12,33 @@ class AnswersController < ApplicationController
   
   def create
     @question = Question.find(params[:question_id])
-    # @answer = @question.answers.build(params[:answer_params])
-    # @answer = current_user.comments.build(params[:answer_params])
     @answer = Answer.new(answer_params)
-    @answer.question_id = @question.id
-    @answer.user_id = current_user.id
-    # @answer.vote = 0
-    @answer.save
-    
+    if @answer.description.length <20 
+      flash[:alert] = "Answer length needs at least 20 characters!"
+    else
+      @answer.question_id = @question.id
+      @answer.user_id = current_user.id
+      @answer.save
+    end
     redirect_to @question
   end
 
   def destroy
-    @answer.delete
-    respond_with(@answer)
+    @question = Question.find(params[:question_id])
+    @answer = @question.answers.find(params[:id])
+
+  if @answer.delete
+    # flash[:notice] = "Answer removed"
+    redirect_to @question
+  else
+    redirect_to @question
+    flash[:notice] = "There was an error deleting your answer, try again"
+  end
   end
   
   def answer_params
     params.require(:answer).permit(:description,:vote, :user_id)
   end
-  
-  # private
-  #   def correct_user
-  #     @answer = current_user.answers.find_by(id: params[:id])
-  #     redirect_to questions_url, alert: "You can't delete or edit other's posts!" if @question.nil?
-  #   end
 
   def index
     @answers = Answer.all
@@ -52,10 +54,6 @@ class AnswersController < ApplicationController
     respond_with(@answer)
   end
 
-  def get_name_user
-    @user = User.find_by(id: params[:@answer.user_id])
-    return @user.email
-  end
   private
     def set_answer
       @answer = Answer.find(params[:id])
