@@ -1,39 +1,45 @@
 <% provide(:title, @question.title ) %>
 <p id="notice"><%= notice %></p>
-<h3><%= @question.title %></h3>
+<h4><%= @question.title %></h4>
+<hr>
 <div class="panel panel-info">
   <div class="panel-body">
     <%= @question.content %>
   </div>
-  <div class="panel-footer">
-    Asked by
-        <%= image_tag @question.user.gravatar_url , width: 15 %><%= link_to @question.user.email, @question.user %> at <%= @question.created_at %>
+  <div class="panel-footer clearfix">
     <% if user_signed_in? and current_user == @question.user  %>
-    <hr>
-      <%= link_to 'Edit', edit_question_path(@question)%>
+    <span class="pull-left">
+      <%= link_to 'Edit', edit_question_path(@question)%>&nbsp&nbsp
       <%= link_to 'Delete', @question,  method: :delete, data: { confirm: 'Are you sure?' } %>
+    </span>
     <% end %>
+    <span class="pull-right">
+      Asked <%= time_ago_in_words(@question.created_at) %> ago<br>
+        <%= image_tag @question.user.gravatar_url , width: 15 %>
+        <%= link_to @question.user.email, @question.user %>
+    </span>
   </div>
 </div>
+<br>
 
-<%= link_to 'Back', questions_path, class: "btn btn-default" %>
-<hr>
-<h4><%= @question.answers.count %>  Answers</h4>
-<hr>
+<p><big><%= @question.answers.count %>  Answers</big></p><hr>
 <% @question.answers.each do |answer| %>
 <div class="panel panel-info">
   <div class="panel-body">
     <%= answer.description %>
-    <%= answer.id%>
   </div>
-  <div class="panel-footer">
-    Answered by 
-        <%= image_tag User.find_by(id: answer.user_id).gravatar_url , width: 15 %><%= link_to User.find_by(id: answer.user_id).email, User.find_by(id: answer.user_id) %> at <%= answer.created_at %>
+  <div class="panel-footer clearfix">
     <% if user_signed_in? and current_user.id == answer.user_id  %>
-      <%= link_to '', edit_question_answer_path(answer.question, answer), title: 'Edit', rel: 'tootlip', class: "glyphicon glyphicon-pencil" %>
-      <br>
-      <%= link_to '', question_answer_path(answer.question, answer), title: 'Delete', rel: 'tooltip', class: "glyphicon glyphicon-remove", method: :delete, data: { confirm: 'Are you sure?' } %>
+    <span class="pull-leftt">
+      <%= link_to 'Edit', edit_question_answer_path(answer.question, answer)%>&nbsp&nbsp
+      <%= link_to 'Delete', question_answer_path(answer.question, answer), method: :delete, data: { confirm: 'Are you sure?' } %>
+    </span>
     <% end %>
+    <span class="pull-right">
+      Answered <%= time_ago_in_words(answer.created_at) %><br>
+        <%= image_tag User.find_by(id: answer.user_id).gravatar_url , width: 15 %>
+        <%= link_to User.find_by(id: answer.user_id).email, User.find_by(id: answer.user_id) %> 
+    </span>
   </div>
 </div>
 <% end %>
@@ -41,10 +47,10 @@
   <%= will_paginate @question.answers.paginate(page: params[:page]) %>
 
 <% if user_signed_in? %>
-  <h4>Your Answer</h4>
+<p><big>Your Answer</big></p>
   <%= form_for [@question, @question.answers.build] do |f| %>
-    <p><%= f.text_area :description, class: "form-control" %></p>
-    <p><%= f.submit "Post your answer", class: "btn btn-primary" %> </p>
+    <p><%= f.text_area :description, class: "form-control", rows: 5, placeholder: "Enter your answer..." %></p>
+    <p><%= f.submit "Post your answer", class: "btn btn-primary", style: "width: auto"%> </p>
   <% end %>
 <% else %>
   <span>Log in to answer</span> <%= link_to "Log in", new_user_session_path, class: "btn btn-primary" %>

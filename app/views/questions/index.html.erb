@@ -1,6 +1,6 @@
 <% provide(:title, "Question List") %>
 <div>
-  <h3>All Questions</h3>
+  <h4>All Questions</h4>
   <% if user_signed_in? %>
     <%= link_to 'Ask Question', new_question_path, class: "btn btn-primary"%>
   <% end %>
