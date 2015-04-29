@@ -13,8 +13,8 @@ class AnswersController < ApplicationController
   def create
     @question = Question.find(params[:question_id])
     @answer = Answer.new(answer_params)
-    if @answer.description.length <20 
-      flash[:alert] = "Answer length needs at least 20 characters!"
+    if @answer.description.length <20 || @answer.description.length > 400
+      flash[:alert] = "Answer length needs at least 20 characters and less than 400 characters!"
     else
       @answer.question_id = @question.id
       @answer.user_id = current_user.id
@@ -28,8 +28,8 @@ class AnswersController < ApplicationController
     @answer = @question.answers.find(params[:id])
 
   if @answer.delete
-    # flash[:notice] = "Answer removed"
     redirect_to @question
+    # flash[:notice] = "Answer removed"
   else
     redirect_to @question
     flash[:notice] = "There was an error deleting your answer, try again"
@@ -50,8 +50,9 @@ class AnswersController < ApplicationController
   end
 
   def update
+    @question = Question.find(params[:question_id])
     @answer.update(answer_params)
-    respond_with(@answer)
+    redirect_to @question
   end
 
   private
