@@ -8,7 +8,9 @@
         <span class="timestamp">
           joined at <%= time_ago_in_words(@user.created_at) %> ago
         </span>
+        <% if current_user.id == @user.id %>
         <%= link_to " Edit profile", edit_user_registration_path %>
+        <% end %>
       </h1>
     </section>
   </aside>
@@ -20,6 +22,7 @@
     <div class="col-md-12"><%= link_to question.title, question%>
     </div>
     <% end %>
+    <!-- <%= will_paginate @user.questions.paginate(page: params[:page]) %> -->
     </div>
   <div class="col-md-6">Your answer list
     <hr>
@@ -27,5 +30,6 @@
     <div class="col-md-12"><%= link_to answer.question_id, answer.question %>
     </div>
     <% end %>
+    <!-- <%= will_paginate @user.answers.paginate(page: params[:page]) %> -->
   </div>
 </div>
